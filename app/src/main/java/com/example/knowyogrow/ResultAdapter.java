@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder> {
 
-    ArrayList<Result> datos = new ArrayList<>();
+    ArrayList<StrainComplete> datos = new ArrayList<>();
     Listener listener;
 
     public void setListener(Listener l) {this.listener = l;}
 
-    public ResultAdapter(ArrayList<Result> datos) {
+    public ResultAdapter(ArrayList<StrainComplete> datos) {
 
         this.datos = datos;
     }
@@ -36,11 +36,21 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        String strainName = datos.get(position).getStrainVariety();
+        String strainName = datos.get(position).getName();
         holder.strainName.setText(strainName);
-        String strainRace = datos.get(position).getRace();
+        String strainRace = datos.get(position).getStrain().getRace();
         holder.strainRace.setText(strainRace);
-        Picasso.get().load(datos.get(position).getImage()).resize(120, 120).transform(new ImageRoundCorners()).into(holder.image);
+        switch (strainRace) {
+
+            case "sativa" : Picasso.get().load("https://p1.pxfuel.com/preview/599/896/1019/marijuana-cannabis-hash-leaf.jpg").resize(150, 150).transform(new ImageRoundCorners()).into(holder.image);
+            break;
+            case "indica" : Picasso.get().load("https://cdn.pixabay.com/photo/2017/03/17/20/22/cannabis-2152604_960_720.jpg").resize(150, 150).transform(new ImageRoundCorners()).into(holder.image);
+                break;
+            case "hybrid" : Picasso.get().load("https://upload.wikimedia.org/wikipedia/commons/5/5a/White_widow.jpg").resize(150, 150).transform(new ImageRoundCorners()).into(holder.image);
+                break;
+
+        }
+
 
     }
 
@@ -67,12 +77,12 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
         @Override
         public void onClick(View view) {
             if (listener != null) {
-                listener.onResultClick();
+                listener.onResultClick(getAdapterPosition());
             }
         }
     }
 
     public interface Listener {
-        void onResultClick();
+        void onResultClick(int position);
     }
 }

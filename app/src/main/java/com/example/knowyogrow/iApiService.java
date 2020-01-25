@@ -12,4 +12,10 @@ public interface iApiService {
     @GET("strains/search/all")
     Call<Map<String,Strain>> getAll();
 
+    @GET("searchdata/effects")
+    Call<ArrayList<Effect>> getEffects();
+
+    @GET("searchdata/flavors")
+    Call<ArrayList<String>> getFlavors();
+
 }

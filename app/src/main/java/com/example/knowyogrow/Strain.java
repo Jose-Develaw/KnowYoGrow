@@ -2,12 +2,13 @@
 
 package com.example.knowyogrow;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-public class Strain {
+public class Strain implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -55,7 +56,7 @@ public class Strain {
     }
 
 
-    public class Effects {
+    public class Effects implements Serializable{
 
         @SerializedName("positive")
         @Expose

@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
-            android:text="Powered by Evanbusse's 'The Strain API'" />
+            android:text="Powered by Evan Busse's 'The Strain API'" />
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
