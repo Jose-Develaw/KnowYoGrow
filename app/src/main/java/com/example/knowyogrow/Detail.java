@@ -9,7 +9,13 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class Detail extends AppCompatActivity {
+
+    TextView descriptionText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +23,28 @@ public class Detail extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         Intent i = getIntent();
         StrainComplete sc = (StrainComplete) i.getSerializableExtra("strainClicked");
+        descriptionText= findViewById(R.id.descriptionText);
+        Call<Description> descriptionCall = ApiService.getApiService().getDescription(sc.getStrain().getId());
+        descriptionCall.enqueue(new Callback<Description>() {
+            @Override
+            public void onResponse(Call<Description> call, Response<Description> response) {
+                Description description = null;
+                if(response.isSuccessful()) {
+                    description = response.body();
+                    descriptionText.setText(description.getDesc());
+
+                }
+                if (description == null || description.getDesc() == null) {
+                    descriptionText= findViewById(R.id.descriptionText);
+                    descriptionText.setText("Sorry, there is no description for this particular strain");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Description> call, Throwable t) {
+
+            }
+        });
 
         TextView name = findViewById(R.id.varietyNameDetail);
         TextView race = findViewById(R.id.varietyRaceDetail);
@@ -25,7 +53,8 @@ public class Detail extends AppCompatActivity {
         TextView medicalText = findViewById(R.id.medicalText);
         TextView flavorText = findViewById(R.id.flavorText);
 
-        name.setText(sc.getName());
+
+        name.setText(sc.getName().toUpperCase());
         String strainRace = sc.getStrain().getRace();
         race.setText(strainRace.toUpperCase());
         positiveText.setText(sc.getStrain().getEffects().getPositive().toString());

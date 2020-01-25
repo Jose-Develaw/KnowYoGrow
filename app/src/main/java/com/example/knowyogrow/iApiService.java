@@ -6,6 +6,7 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface iApiService {
 
@@ -17,5 +18,9 @@ public interface iApiService {
 
     @GET("searchdata/flavors")
     Call<ArrayList<String>> getFlavors();
+
+    @GET("strains/data/desc/{id}")
+    Call<Description> getDescription(@Path("id") int id);
+
 
 }
