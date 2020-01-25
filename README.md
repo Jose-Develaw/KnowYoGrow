@@ -12,6 +12,4 @@ https://strains.evanbusse.com
 <p align="center">
   <img src="https://github.com/Jose-Develaw/KnowYoGrow/blob/master/cap3.PNG">
 </p>
-<p align="center">
-  <img src="https://github.com/Jose-Develaw/KnowYoGrow/blob/master/cap4.PNG">
-</p>
+
