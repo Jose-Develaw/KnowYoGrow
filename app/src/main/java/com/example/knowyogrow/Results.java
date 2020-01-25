@@ -22,14 +22,32 @@ public class Results extends AppCompatActivity implements ResultAdapter.Listener
     String race;
     String effect;
     String flavor;
+    String filterType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent i = getIntent();
-        race = i.getStringExtra("race");
-        effect = i.getStringExtra("effect");
-        flavor = i.getStringExtra("flavor");
+
+        if (i.getStringExtra("race") != null) {
+            race = i.getStringExtra("race");
+        } else {
+            race = "";
+        }
+
+        if (i.getStringExtra("effect") != null) {
+            effect = i.getStringExtra("effect");
+        } else {
+            effect = "";
+        }
+
+        if (i.getStringExtra("flavor") != null) {
+            flavor = i.getStringExtra("flavor");
+        } else {
+            flavor = "";
+        }
+
+        filterType = i.getStringExtra("filterType");
         datos = new ArrayList<>();
         setContentView(R.layout.activity_results);
         myRecycler = findViewById(R.id.myRecycler);
@@ -52,25 +70,82 @@ public class Results extends AppCompatActivity implements ResultAdapter.Listener
 
         Map<String, Strain> result = response.body();
         boolean containsEffect = false;
-        for(Map.Entry<String, Strain> entry : result.entrySet()) {
 
-            String name = entry.getKey();
-            Strain strain = entry.getValue();
+        if (filterType.equals("all")) {
 
-            if (strain.getEffects().getMedical().contains(effect) ||
-            strain.getEffects().getNegative().contains(effect) ||
-            strain.getEffects().getPositive().contains(effect)) {
-                containsEffect = true;
+            for(Map.Entry<String, Strain> entry : result.entrySet()) {
+
+                String name = entry.getKey();
+                Strain strain = entry.getValue();
+
+                if (strain.getEffects().getMedical().contains(effect) ||
+                        strain.getEffects().getNegative().contains(effect) ||
+                        strain.getEffects().getPositive().contains(effect)) {
+                    containsEffect = true;
+
+                }
+                if (strain.getFlavors().contains(flavor) && strain.getRace().equals(race.toLowerCase()) && containsEffect) {
+                    StrainComplete sc = new StrainComplete(name, strain);
+                    datos.add(sc);
+                }
+
+                containsEffect = false;
 
             }
-            if (strain.getFlavors().contains(flavor) && strain.getRace().equals(race.toLowerCase()) && containsEffect) {
-                StrainComplete sc = new StrainComplete(name, strain);
-                datos.add(sc);
-            }
-
-            containsEffect = false;
-
         }
+
+        if (filterType.equals("byRace")) {
+
+            for(Map.Entry<String, Strain> entry : result.entrySet()) {
+
+                String name = entry.getKey();
+                Strain strain = entry.getValue();
+
+                if (strain.getRace().equals(race.toLowerCase())) {
+                    StrainComplete sc = new StrainComplete(name, strain);
+                    datos.add(sc);
+                }
+
+            }
+        }
+
+        if (filterType.equals("byEffect")) {
+
+            for(Map.Entry<String, Strain> entry : result.entrySet()) {
+
+                String name = entry.getKey();
+                Strain strain = entry.getValue();
+
+                if (strain.getEffects().getMedical().contains(effect) ||
+                        strain.getEffects().getNegative().contains(effect) ||
+                        strain.getEffects().getPositive().contains(effect)) {
+
+                    StrainComplete sc = new StrainComplete(name, strain);
+                    datos.add(sc);
+
+                }
+
+            }
+        }
+
+        if (filterType.equals("byFlavor")) {
+
+
+
+            for(Map.Entry<String, Strain> entry : result.entrySet()) {
+
+                String name = entry.getKey();
+                Strain strain = entry.getValue();
+
+                if (strain.getFlavors().contains(flavor)) {
+                    StrainComplete sc = new StrainComplete(name, strain);
+                    datos.add(sc);
+                }
+
+            }
+        }
+
+
 
         myRecycler = findViewById(R.id.myRecycler);
 

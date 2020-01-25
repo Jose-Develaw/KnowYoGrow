@@ -20,7 +20,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(Login.this, Filter.class);
+                Intent i = new Intent(Login.this, MainActivity.class);
                 startActivity(i);
             }
         });

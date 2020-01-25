@@ -37,8 +37,8 @@ public class Filter extends AppCompatActivity implements View.OnClickListener, C
 
 
 
-        Call<ArrayList<Effect>> efectListCall = ApiService.getApiService().getEffects();
-        efectListCall.enqueue(this);
+        Call<ArrayList<Effect>> effectListCall = ApiService.getApiService().getEffects();
+        effectListCall.enqueue(this);
         Call<ArrayList<String>> flavorListCall = ApiService.getApiService().getFlavors();
         flavorListCall.enqueue(new Callback<ArrayList<String>>() {
             @Override
@@ -49,10 +49,10 @@ public class Filter extends AppCompatActivity implements View.OnClickListener, C
 
 
                         Chip c = new Chip(flavors.getContext());
-                        c.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(effects.getContext(), R.color.colorAccent)));
+                        c.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(flavors.getContext(), R.color.colorAccent)));
                         c.setText(flavorsList.get(i));
                         c.setCheckable(true);
-                        c.setChipStrokeColor(ColorStateList.valueOf(ContextCompat.getColor(effects.getContext(), R.color.colorPrimary)));
+                        c.setChipStrokeColor(ColorStateList.valueOf(ContextCompat.getColor(flavors.getContext(), R.color.colorPrimary)));
                         c.setChipStrokeWidth(5);
                         c.setCheckedIcon(ContextCompat.getDrawable(flavors.getContext(), android.R.drawable.star_big_on));
                         flavors.addView(c);
@@ -94,6 +94,7 @@ public class Filter extends AppCompatActivity implements View.OnClickListener, C
             i.putExtra("race", raceString);
             i.putExtra("effect", effectString);
             i.putExtra("flavor", flavorString);
+            i.putExtra("filterType", "all");
             startActivity(i);
         } else {
             Toast.makeText(this, "SELECT AT LEAST ONE FILTER FOR EACH CATEGORY", Toast.LENGTH_LONG).show();
