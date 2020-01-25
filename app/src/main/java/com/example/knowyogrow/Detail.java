@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -16,13 +19,25 @@ import retrofit2.Response;
 public class Detail extends AppCompatActivity {
 
     TextView descriptionText;
+    StrainComplete sc;
+    DBInterface dbInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        Button toFav = findViewById(R.id.addFavButton);
+        toFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dbInterface = new DBInterface(Detail.this);
+                dbInterface.open();
+                dbInterface.newFavourite(sc.getStrain().getId());
+                Toast.makeText(Detail.this, "Added to favourites", Toast.LENGTH_LONG).show();
+            }
+        });
         Intent i = getIntent();
-        StrainComplete sc = (StrainComplete) i.getSerializableExtra("strainClicked");
+        sc = (StrainComplete) i.getSerializableExtra("strainClicked");
         descriptionText= findViewById(R.id.descriptionText);
         Call<Description> descriptionCall = ApiService.getApiService().getDescription(sc.getStrain().getId());
         descriptionCall.enqueue(new Callback<Description>() {
