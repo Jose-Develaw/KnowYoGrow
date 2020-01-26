@@ -21,6 +21,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements ResultAdapter.Listener {
 
     DBInterface dbInterface;
+    StrainIntermediate si;
     ArrayList<StrainComplete> data;
     RecyclerView favouriteRecycler;
 
@@ -67,8 +68,57 @@ public class MainActivity extends AppCompatActivity implements ResultAdapter.Lis
     }
 
     public void loadingData() {
+        si = null;
+        data = new ArrayList<>();
+        dbInterface = new DBInterface(MainActivity.this);
+        dbInterface.open();
+        Cursor intermedio = dbInterface.getStrainT();
+        if (intermedio.moveToFirst() && intermedio != null) {
+            do {
+                ArrayList<String> flavors = new ArrayList<>();
+                ArrayList<String> positive_fx = new ArrayList<>();
+                ArrayList<String> negative_fx = new ArrayList<>();
+                ArrayList<String> medical_fx = new ArrayList<>();
+                si = new StrainIntermediate(intermedio.getInt(0), intermedio.getString(1), intermedio.getString(2));
 
-        Call<Map<String, Strain>> resultados = ApiService.getApiService().getAll();
+                Cursor flavorsC = dbInterface.getFlavorT(si.getId());
+                if (flavorsC.moveToFirst() && flavorsC != null) {
+                    do {
+                        flavors.add(flavorsC.getString(0));
+                    } while (flavorsC.moveToNext());
+                }
+
+                Cursor positiveC = dbInterface.getPositiveT(si.getId());
+                if (positiveC.moveToFirst() && positiveC != null) {
+                    do {
+                        positive_fx.add(positiveC.getString(0));
+                    } while (positiveC.moveToNext());
+                }
+
+                Cursor negativeC = dbInterface.getNegativeT(si.getId());
+                if (negativeC.moveToFirst() && negativeC != null) {
+                    do {
+                        negative_fx.add(negativeC.getString(0));
+                    } while (negativeC.moveToNext());
+                }
+
+                Cursor medicalC = dbInterface.getMedicalT(si.getId());
+                if (medicalC.moveToFirst() && medicalC != null) {
+                    do {
+                        medical_fx.add(medicalC.getString(0));
+                    } while (medicalC.moveToNext());
+                }
+
+                Strain strain = new Strain(si.getId(), si.getRace(), flavors, new Effects(positive_fx, negative_fx, medical_fx));
+                StrainComplete sc = new StrainComplete(si.getName(), strain);
+                data.add(sc);
+
+            } while (intermedio.moveToNext());
+
+
+        }
+
+        /*Call<Map<String, Strain>> resultados = ApiService.getApiService().getAll();
         resultados.enqueue(new Callback<Map<String, Strain>>() {
             @Override
             public void onResponse(Call<Map<String, Strain>> call, Response<Map<String, Strain>> response) {
@@ -76,6 +126,8 @@ public class MainActivity extends AppCompatActivity implements ResultAdapter.Lis
 
                 dbInterface = new DBInterface(MainActivity.this);
                 dbInterface.open();
+
+
                 Cursor c = dbInterface.getFavourites();
                 int [] numberOfFavs = new int[c.getCount()];
                 int counter = 0;
@@ -115,8 +167,15 @@ public class MainActivity extends AppCompatActivity implements ResultAdapter.Lis
             public void onFailure(Call<Map<String, Strain>> call, Throwable t) {
 
             }
-        });
+        });*/
 
+
+
+        ResultAdapter adapter = new ResultAdapter(data);
+        adapter.setListener(MainActivity.this);
+        favouriteRecycler.setAdapter(adapter);
+        favouriteRecycler.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        adapter.notifyDataSetChanged();
 
     }
 

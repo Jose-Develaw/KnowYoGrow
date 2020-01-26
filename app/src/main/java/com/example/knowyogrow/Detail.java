@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +34,13 @@ public class Detail extends AppCompatActivity {
             public void onClick(View view) {
                 dbInterface = new DBInterface(Detail.this);
                 dbInterface.open();
-                dbInterface.newFavourite(sc.getStrain().getId());
+
+                ArrayList<String> flavors = (ArrayList<String>) sc.getStrain().getFlavors();
+                ArrayList<String> positive_fx = (ArrayList<String>) sc.getStrain().getEffects().getPositive();
+                ArrayList<String> negative_fx = (ArrayList<String>) sc.getStrain().getEffects().getNegative();
+                ArrayList<String> medicos_fx = (ArrayList<String>) sc.getStrain().getEffects().getMedical();
+
+                dbInterface.newFavourite(sc.getStrain().getId(), sc.getName(), sc.getStrain().getRace(), flavors, positive_fx, negative_fx, medicos_fx);
                 Toast.makeText(Detail.this, "Added to favourites", Toast.LENGTH_LONG).show();
             }
         });

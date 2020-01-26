@@ -23,6 +23,13 @@ public class Strain implements Serializable {
     @Expose
     private Effects effects;
 
+    public Strain(Integer id, String race, List<String> flavors, Effects effects) {
+        this.id = id;
+        this.race = race;
+        this.flavors = flavors;
+        this.effects = effects;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -56,41 +63,5 @@ public class Strain implements Serializable {
     }
 
 
-    public class Effects implements Serializable{
 
-        @SerializedName("positive")
-        @Expose
-        private List<String> positive = null;
-        @SerializedName("negative")
-        @Expose
-        private List<String> negative = null;
-        @SerializedName("medical")
-        @Expose
-        private List<String> medical = null;
-
-        public List<String> getPositive() {
-            return positive;
-        }
-
-        public void setPositive(List<String> positive) {
-            this.positive = positive;
-        }
-
-        public List<String> getNegative() {
-            return negative;
-        }
-
-        public void setNegative(List<String> negative) {
-            this.negative = negative;
-        }
-
-        public List<String> getMedical() {
-            return medical;
-        }
-
-        public void setMedical(List<String> medical) {
-            this.medical = medical;
-        }
-
-    }
 }
