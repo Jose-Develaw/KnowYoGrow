@@ -134,12 +134,7 @@ public class DBInterface {
         }
     }
 
-    public Cursor getFavourites(){
-        return bd.query(BD_TABLA, new String []
-                        {CAMPO_ID},
-                null,null, null, null,
-                null);
-    }
+
 
     public Cursor getStrainT(){
         return bd.query(BD_STRAIN_T, new String []
@@ -150,7 +145,6 @@ public class DBInterface {
 
     public Cursor getFlavorT(int id){
 
-        System.out.println("Here");
         return bd.query(BD_FLAVORS_T, new String []
                         {FLAVORS_T_FLAVOR},
                 FLAVORS_T_STRAIN_ID + "=" + id, null, null, null,
@@ -182,7 +176,12 @@ public class DBInterface {
 
     public long deleteFavourite(long id)
     {
-        return bd.delete(BD_TABLA, CAMPO_ID + "=" + id, null);
+        bd.delete(BD_STRAIN_T, STRAIN_T_ID + "=" + id, null);
+        bd.delete(BD_FLAVORS_T, FLAVORS_T_STRAIN_ID + "=" + id, null);
+        bd.delete(BD_POSITIVE_T, POSITIVE_T_STRAIN_ID + "=" + id, null);
+        bd.delete(BD_NEGATIVE_T, NEGATIVE_T_STRAIN_ID + "=" + id, null);
+        bd.delete(BD_MEDICAL_T, MEDICAL_T_STRAIN_ID + "=" + id, null);
+        return 1;
     }
 
     public class AyudaDB extends SQLiteOpenHelper {

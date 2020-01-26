@@ -14,14 +14,19 @@ import java.util.ArrayList;
 
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder> {
 
-    ArrayList<StrainComplete> datos = new ArrayList<>();
+    ArrayList<StrainComplete> data = new ArrayList<>();
     Listener listener;
+    IOnLongClick iOnLongClick;
+
+    public void setiOnLongClick(IOnLongClick iOnLongClick) {
+        this.iOnLongClick = iOnLongClick;
+    }
 
     public void setListener(Listener l) {this.listener = l;}
 
     public ResultAdapter(ArrayList<StrainComplete> datos) {
 
-        this.datos = datos;
+        this.data = datos;
     }
 
     @NonNull
@@ -36,9 +41,9 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        String strainName = datos.get(position).getName();
+        String strainName = data.get(position).getName();
         holder.strainName.setText(strainName);
-        String strainRace = datos.get(position).getStrain().getRace();
+        String strainRace = data.get(position).getStrain().getRace();
         holder.strainRace.setText(strainRace);
         switch (strainRace) {
 
@@ -51,15 +56,21 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
 
         }
 
-
     }
 
     @Override
     public int getItemCount() {
-        return datos.size();
+        return data.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public void remove(int position) {
+        data.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, data.size());
+
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         ImageView image;
         TextView strainName;
@@ -72,6 +83,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
             strainName = view.findViewById(R.id.strainName);
             strainRace = view.findViewById(R.id.strainRace);
             view.setOnClickListener(this);
+            view.setOnLongClickListener(this);
         }
 
         @Override
@@ -80,9 +92,22 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
                 listener.onResultClick(getAdapterPosition());
             }
         }
+
+        @Override
+        public boolean onLongClick(View view) {
+            if (iOnLongClick != null) {
+                iOnLongClick.showMenu(getAdapterPosition(), view);}
+            return true;
+        }
     }
 
     public interface Listener {
         void onResultClick(int position);
+    }
+
+    public interface IOnLongClick{
+
+        void showMenu(int position, View view);
+
     }
 }

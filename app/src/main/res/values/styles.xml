@@ -7,6 +7,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/roboto</item>
+        <item name="actionOverflowButtonStyle">@style/MyOverflowButtonStyle</item>
+        <item name="android:itemBackground">@color/colorPrimaryDark</item>
+        <item name="android:itemTextAppearance">@style/texto</item>
+        <item name="android:toolbarStyle">@style/toolBar</item>
     </style>
 
     <style name="Chips" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -16,6 +20,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MyOverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@android:color/white</item>
+    </style>
 
+    <style name="texto" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="toolBar" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/cherry_cream_soda</item>
+        <item name="android:textSize">20dp</item>
+    </style>
 
 </resources>

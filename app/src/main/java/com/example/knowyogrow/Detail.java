@@ -3,6 +3,7 @@ package com.example.knowyogrow;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,16 +33,33 @@ public class Detail extends AppCompatActivity {
         toFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                boolean already = false;
                 dbInterface = new DBInterface(Detail.this);
                 dbInterface.open();
+                Cursor c =  dbInterface.getStrainT();
+                if (c.moveToFirst() && c != null) {
+                    do {
+                        int id = c.getInt(0);
+                        if (id == sc.getStrain().getId()) {already = true;}
+                    } while (c.moveToNext());
+                }
 
-                ArrayList<String> flavors = (ArrayList<String>) sc.getStrain().getFlavors();
-                ArrayList<String> positive_fx = (ArrayList<String>) sc.getStrain().getEffects().getPositive();
-                ArrayList<String> negative_fx = (ArrayList<String>) sc.getStrain().getEffects().getNegative();
-                ArrayList<String> medicos_fx = (ArrayList<String>) sc.getStrain().getEffects().getMedical();
+                if (!already) {
+                    ArrayList<String> flavors = (ArrayList<String>) sc.getStrain().getFlavors();
+                    ArrayList<String> positive_fx = (ArrayList<String>) sc.getStrain().getEffects().getPositive();
+                    ArrayList<String> negative_fx = (ArrayList<String>) sc.getStrain().getEffects().getNegative();
+                    ArrayList<String> medicos_fx = (ArrayList<String>) sc.getStrain().getEffects().getMedical();
 
-                dbInterface.newFavourite(sc.getStrain().getId(), sc.getName(), sc.getStrain().getRace(), flavors, positive_fx, negative_fx, medicos_fx);
-                Toast.makeText(Detail.this, "Added to favourites", Toast.LENGTH_LONG).show();
+                    dbInterface.newFavourite(sc.getStrain().getId(), sc.getName(), sc.getStrain().getRace(), flavors, positive_fx, negative_fx, medicos_fx);
+                    Toast.makeText(Detail.this, "Added to favourites", Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    Toast.makeText(Detail.this, "This strain is already among your favs", Toast.LENGTH_LONG).show();
+                }
+
+
             }
         });
         Intent i = getIntent();
