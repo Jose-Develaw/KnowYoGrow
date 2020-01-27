@@ -7,6 +7,7 @@
     tools:context=".FilterByEffect">
 
 
+
     <TextView
         android:id="@+id/byEffectHeader"
         android:layout_width="0dp"

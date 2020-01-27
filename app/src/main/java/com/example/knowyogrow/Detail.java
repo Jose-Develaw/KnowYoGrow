@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -25,12 +27,17 @@ public class Detail extends AppCompatActivity {
     StrainComplete sc;
     DBInterface dbInterface;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        Button toFav = findViewById(R.id.addFavButton);
-        toFav.setOnClickListener(new View.OnClickListener() {
+
+
+
+        //Button toFav = findViewById(R.id.addFavButton);
+        FloatingActionButton floatingFav = findViewById(R.id.floatingFav);
+        floatingFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

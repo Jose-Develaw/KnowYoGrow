@@ -23,6 +23,7 @@ public class FilterByEffect extends AppCompatActivity implements View.OnClickLis
 
     public ChipGroup effects;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

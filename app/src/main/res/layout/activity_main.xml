@@ -6,39 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/titleCard"
+
+    <TextView
+        android:id="@+id/myFavouriteTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="16dp"
-        android:elevation="28dp"
-        app:cardCornerRadius="5dp"
+        android:layout_marginTop="24dp"
+        android:elevation="8dp"
+        android:fontFamily="@font/cherry_cream_soda"
+        android:text="MY FAV STRAINS"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/myFavouriteTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/frame_ev"
-                android:elevation="8dp"
-                android:fontFamily="@font/cherry_cream_soda"
-                android:text="MY FAV STRAINS"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -49,17 +32,31 @@
         android:theme="?attr/actionBarTheme"
         app:titleTextColor="@android:color/white"
         app:titleTextAppearance="@style/toolBar"
+        app:navigationIcon="@drawable/ic_icons8_cannabis_96white"
         app:title="Know Yo' Grow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <FrameLayout
+        android:id="@+id/frameMain"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="128dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/myFavouriteTitle">
+
+    </FrameLayout>
+
+
+    <!--<androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favouriteRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="128dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleCard" />
+        app:layout_constraintTop_toBottomOf="@id/myFavouriteTitle" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

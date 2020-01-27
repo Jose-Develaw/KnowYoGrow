@@ -32,6 +32,7 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:fontFamily">@font/cherry_cream_soda</item>
         <item name="android:textSize">20dp</item>
+        <item name="android:drawableLeft">@android:drawable/star_big_on</item>
     </style>
 
 </resources>

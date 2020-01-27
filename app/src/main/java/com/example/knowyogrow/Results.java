@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,10 +25,15 @@ public class Results extends AppCompatActivity implements ResultAdapter.Listener
     String effect;
     String flavor;
     String filterType;
+    ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+
+
         Intent i = getIntent();
 
         if (i.getStringExtra("race") != null) {
@@ -153,6 +160,9 @@ public class Results extends AppCompatActivity implements ResultAdapter.Listener
         adapter.setListener(Results.this);
         myRecycler.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+        spinner.setVisibility(View.GONE);
+
 
 
     }
