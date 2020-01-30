@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:foregroundTint="@color/colorAccent"
+        app:backgroundTint="@color/colorAccent"
+        app:borderWidth="2dp"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_gravity="end|bottom"
+        app:srcCompat="@android:drawable/star_big_on" />
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    tools:context=".Detail"
-    >
+    tools:context=".Detail">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -40,21 +58,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />-->
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingFav"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:clickable="true"
-            android:foregroundTint="@color/colorAccent"
-            app:backgroundTint="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/star_big_on" />
-
-
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView5"
             android:layout_width="match_parent"
@@ -62,7 +65,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="96dp"
             android:elevation="8dp"
             app:cardCornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -298,4 +301,8 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
 </ScrollView>
+
+</FrameLayout>

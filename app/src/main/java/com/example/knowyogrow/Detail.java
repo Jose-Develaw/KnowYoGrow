@@ -75,7 +75,8 @@ public class Detail extends AppCompatActivity {
                     ArrayList<String> negative_fx = (ArrayList<String>) sc.getStrain().getEffects().getNegative();
                     ArrayList<String> medicos_fx = (ArrayList<String>) sc.getStrain().getEffects().getMedical();
                     floatingFav.setImageDrawable(getDrawable(android.R.drawable.star_big_on));
-                    floatingFav.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.colorPrimary)));
+                    floatingFav.setCompatElevation(5);
+                   // floatingFav.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.colorAccent)));
 
                     dbInterface.newFavourite(sc.getStrain().getId(), sc.getName(), sc.getStrain().getRace(), flavors, positive_fx, negative_fx, medicos_fx);
                     Toast.makeText(Detail.this, "Added to favourites", Toast.LENGTH_LONG).show();
@@ -83,7 +84,7 @@ public class Detail extends AppCompatActivity {
                 } else {
                     already = false;
                     floatingFav.setImageDrawable(getDrawable(android.R.drawable.star_big_off));
-                    floatingFav.setBackgroundTintList(ColorStateList.valueOf(getColor(android.R.color.white)));
+                    floatingFav.setCompatElevation(50);
                     dbInterface.deleteFavourite(sc.getStrain().getId());
                     Toast.makeText(getLayoutInflater().getContext(), "Strain '"+sc.getName()+"' has been removed from favs",
                             Toast.LENGTH_LONG).show();
@@ -95,10 +96,12 @@ public class Detail extends AppCompatActivity {
 
         if(!already) {floatingFav.setCompatElevation(8);
          floatingFav.setImageDrawable(getDrawable(android.R.drawable.star_big_off));
-        floatingFav.setBackgroundTintList(ColorStateList.valueOf(getColor(android.R.color.white)));} else {
+            floatingFav.setCompatElevation(50);
+       } else {
 
             floatingFav.setImageDrawable(getDrawable(android.R.drawable.star_big_on));
-            floatingFav.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.colorPrimary)));
+            floatingFav.setCompatElevation(5);
+
         }
 
 
