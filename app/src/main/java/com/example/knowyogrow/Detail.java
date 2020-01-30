@@ -142,32 +142,20 @@ public class Detail extends AppCompatActivity {
         race.setText(strainRace.toUpperCase());
 
 
-        String poslist ="";
-        for (int i = 0; i < sc.getStrain().getEffects().getPositive().size() -1 ; i++) {
-            poslist += sc.getStrain().getEffects().getPositive().get(i) +", ";
-        }
-        poslist += sc.getStrain().getEffects().getPositive().get(sc.getStrain().getEffects().getPositive().size() -1);
+        String poslist = sc.getStrain().getEffects().getPositive().toString();
+        poslist = poslist.replace("[", "").replace("]", "");
         positiveText.setText(poslist);
 
-        String neglist ="";
-        for (int i = 0; i < sc.getStrain().getEffects().getNegative().size() -1 ; i++) {
-            neglist += sc.getStrain().getEffects().getNegative().get(i) +", ";
-        }
-        neglist += sc.getStrain().getEffects().getNegative().get(sc.getStrain().getEffects().getNegative().size() -1);
+        String neglist = sc.getStrain().getEffects().getNegative().toString();
+        neglist = neglist.replace("[", "").replace("]", "");
         negativeText.setText(neglist);
 
-        String medlist ="";
-        for (int i = 0; i < sc.getStrain().getEffects().getMedical().size() -1 ; i++) {
-            medlist += sc.getStrain().getEffects().getMedical().get(i) +", ";
-        }
-        medlist += sc.getStrain().getEffects().getMedical().get(sc.getStrain().getEffects().getMedical().size() -1);
+        String medlist = sc.getStrain().getEffects().getMedical().toString();
+        medlist = medlist.replace("[", "").replace("]", "");
         medicalText.setText(medlist);
 
-        String flavors ="";
-        for (int i = 0; i < sc.getStrain().getFlavors().size() -1 ; i++) {
-            flavors += sc.getStrain().getFlavors().get(i) +", ";
-        }
-        flavors += sc.getStrain().getFlavors().get(sc.getStrain().getFlavors().size() -1);
+        String flavors = sc.getStrain().getFlavors().toString();
+        flavors = flavors.replace("[", "").replace("]", "");
         flavorText.setText(flavors);
 
 
