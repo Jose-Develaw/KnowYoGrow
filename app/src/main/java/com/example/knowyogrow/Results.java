@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -30,33 +31,41 @@ public class Results extends AppCompatActivity implements ResultAdapter.Listener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_results);
 
         spinner = (ProgressBar)findViewById(R.id.progressBar1);
+        TextView filteredBy = findViewById(R.id.filteredBy);
 
 
         Intent i = getIntent();
 
         if (i.getStringExtra("race") != null) {
             race = i.getStringExtra("race");
+            String display = "Race: " + race.toString();
+            filteredBy.setText(display);
         } else {
             race = "";
         }
 
         if (i.getStringExtra("effect") != null) {
             effect = i.getStringExtra("effect");
+            String display = "Effect: " + effect.toString();
+            filteredBy.setText(display);
         } else {
             effect = "";
         }
 
         if (i.getStringExtra("flavor") != null) {
             flavor = i.getStringExtra("flavor");
+            String display = "Flavor: " + flavor.toString();
+            filteredBy.setText(display);
         } else {
             flavor = "";
         }
 
         filterType = i.getStringExtra("filterType");
         datos = new ArrayList<>();
-        setContentView(R.layout.activity_results);
+
         myRecycler = findViewById(R.id.myRecycler);
         myRecycler.setLayoutManager( new LinearLayoutManager(this));
         Call<Map<String, Strain>> resultados = ApiService.getApiService().getAll();
