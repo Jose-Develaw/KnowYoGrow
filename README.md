@@ -7,12 +7,31 @@ https://strains.evanbusse.com
   <img src="https://github.com/Jose-Develaw/KnowYoGrow/blob/master/cap.PNG">
 </p>
 <p align="center">
-  <img src="https://github.com/Jose-Develaw/KnowYoGrow/blob/master/cap2.PNG">
+  <img src="https://github.com/Jose-Develaw/KnowYoGrow/blob/master/AppPhoto/ph2.PNG">
 </p>
 <p align="center">
-  <img src="https://github.com/Jose-Develaw/KnowYoGrow/blob/master/cap3.PNG">
+  <img src="https://github.com/Jose-Develaw/KnowYoGrow/blob/master/AppPhoto/ph3.PNG">
 </p>
 <p align="center">
-  <img src="https://github.com/Jose-Develaw/KnowYoGrow/blob/master/cap4.PNG">
+  <img src="https://github.com/Jose-Develaw/KnowYoGrow/blob/master/AppPhoto/ph4.PNG">
 </p>
+<p align="center">
+  <img src="https://github.com/Jose-Develaw/KnowYoGrow/blob/master/AppPhoto/ph5.PNG">
+</p>
+<p align="center">
+  <img src="https://github.com/Jose-Develaw/KnowYoGrow/blob/master/AppPhoto/ph6.PNG">
+</p>
+<p align="center">
+  <img src="https://github.com/Jose-Develaw/KnowYoGrow/blob/master/AppPhoto/ph7.PNG">
+</p>
+<p align="center">
+  <img src="https://github.com/Jose-Develaw/KnowYoGrow/blob/master/AppPhoto/ph8.PNG">
+</p>
+<p align="center">
+  <img src="https://github.com/Jose-Develaw/KnowYoGrow/blob/master/AppPhoto/ph9.PNG">
+</p>
+<p align="center">
+  <img src="https://github.com/Jose-Develaw/KnowYoGrow/blob/master/AppPhoto/ph10.PNG">
+</p>
+
 
