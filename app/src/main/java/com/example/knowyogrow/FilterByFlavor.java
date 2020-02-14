@@ -71,6 +71,7 @@ public class FilterByFlavor extends AppCompatActivity implements View.OnClickLis
             i.putExtra("flavor", flavorString);
             i.putExtra("filterType", "byFlavor");
             startActivity(i);
+
         } else {
             Toast.makeText(this, "SELECT A FLAVOR FOR FILTERING", Toast.LENGTH_LONG).show();
         }

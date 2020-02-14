@@ -1,11 +1,13 @@
 package com.example.knowyogrow;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.ResultReceiver;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -33,6 +35,17 @@ public class Results extends AppCompatActivity implements ResultAdapter.Listener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Results.this, MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+
+            }
+        });
         spinner = (ProgressBar)findViewById(R.id.progressBar1);
         TextView filteredBy = findViewById(R.id.filteredBy);
 
@@ -77,8 +90,16 @@ public class Results extends AppCompatActivity implements ResultAdapter.Listener
     public void onResultClick(int position) {
         StrainComplete sc = datos.get(position);
         Intent i = new Intent(Results.this, Detail.class);
+        i.putExtra("finisher", new ResultReceiver(null) {
+            @Override
+            protected void onReceiveResult(int resultCode, Bundle resultData) {
+                Results.this.finish();
+            }
+        });
         i.putExtra("strainClicked", sc);
-        startActivity(i);
+        i.putExtra("fromResults", "fromResults");
+        startActivityForResult(i,1);
+
     }
 
     @Override

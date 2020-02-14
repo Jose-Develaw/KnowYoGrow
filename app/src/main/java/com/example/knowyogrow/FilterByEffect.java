@@ -77,6 +77,7 @@ public class FilterByEffect extends AppCompatActivity implements View.OnClickLis
             i.putExtra("effect", effectString);
             i.putExtra("filterType", "byEffect");
             startActivity(i);
+
         } else {
             Toast.makeText(this, "SELECT AN EFFECT FOR FILTERING", Toast.LENGTH_LONG).show();
         }

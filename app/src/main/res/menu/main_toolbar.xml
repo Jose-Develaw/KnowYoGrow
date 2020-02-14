@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <item android:id="@+id/byRace" android:title="Filter by RACE" android:onClick="filterByRace"/>
     <item android:id="@+id/byEffect" android:title="Filter by EFFECT" android:onClick="filterByEffect"/>
     <item android:id="@+id/byFlavor" android:title="Filter by FLAVOR" android:onClick="filterByFlavor"/>
-    <group>
-        <item android:id="@+id/allFilter" android:title="All filters" android:onClick="filterByAll"/>
+    <item android:id="@+id/allFilter" android:title="All filters" android:onClick="filterByAll"/>
+    <group
+        android:enabled="true"
+        android:menuCategory="system"
+        android:visible="true">
+        <item
+            android:id="@+id/logOut"
+            android:onClick="logOut"
+            android:title="LOG OUT" />
     </group>
 
 </menu>

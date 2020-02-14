@@ -2,6 +2,7 @@ package com.example.knowyogrow;
 
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -13,7 +14,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.ContextMenu;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -45,6 +48,8 @@ public class FavListFragment extends Fragment implements  ResultAdapter.IOnLongC
                              Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_fav_list, container, false);
+
+
     }
 
     @Override
@@ -106,6 +111,7 @@ public class FavListFragment extends Fragment implements  ResultAdapter.IOnLongC
         }
         return super.onContextItemSelected(item);
     }
+
 
     public void loadingData() {
 

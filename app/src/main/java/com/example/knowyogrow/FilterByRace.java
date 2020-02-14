@@ -37,6 +37,7 @@ public class FilterByRace extends AppCompatActivity implements View.OnClickListe
             i.putExtra("race", raceString);
             i.putExtra("filterType", "byRace");
             startActivity(i);
+
         } else {
             Toast.makeText(this, "SELECT A RACE FOR FILTERING", Toast.LENGTH_LONG).show();
         }

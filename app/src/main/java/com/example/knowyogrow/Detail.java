@@ -1,12 +1,16 @@
 package com.example.knowyogrow;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
+import android.os.ResultReceiver;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,12 +33,30 @@ public class Detail extends AppCompatActivity {
     StrainComplete sc;
     DBInterface dbInterface;
     boolean already = false;
+    String fromResults = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        fromResults = getIntent().getStringExtra("fromResults");
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Detail.this, MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                /*Intent intent = getIntent();
+                if (intent.getStringExtra("fromResults") != null) {
+                    ((ResultReceiver)getIntent().getParcelableExtra("finisher")).send(1, new Bundle());
+                }
+                finish();*/
+
+            }
+        });
         Intent intent = getIntent();
         sc = (StrainComplete) intent.getSerializableExtra("strainClicked");
         dbInterface = new DBInterface(Detail.this);
@@ -176,4 +198,5 @@ public class Detail extends AppCompatActivity {
 
 
     }
+
 }

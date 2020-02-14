@@ -2,6 +2,7 @@ package com.example.knowyogrow;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,7 +11,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.ResultReceiver;
+import android.util.Log;
 import android.view.ContextMenu;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -40,6 +44,7 @@ public class MainActivity extends AppCompatActivity /*implements ResultAdapter.L
         frameMain = (FrameLayout) findViewById(R.id.frameMain);
         setSupportActionBar(toolbar);
         loadingFragment();
+        //((ResultReceiver)getIntent().getParcelableExtra("finisher")).send(1, new Bundle());
     }
 
 
@@ -52,27 +57,42 @@ public class MainActivity extends AppCompatActivity /*implements ResultAdapter.L
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_toolbar, menu);
+        MenuCompat.setGroupDividerEnabled(menu, true);
+
+
         return true;
     }
 
     public void filterByRace(MenuItem item) {
         Intent intent = new Intent(this, FilterByRace.class);
         startActivity(intent);
+
     }
 
     public void filterByEffect(MenuItem item) {
         Intent intent = new Intent(this, FilterByEffect.class);
         startActivity(intent);
+
     }
 
     public void filterByFlavor(MenuItem item) {
         Intent intent = new Intent(this, FilterByFlavor.class);
         startActivity(intent);
+
     }
 
     public void filterByAll(MenuItem item) {
         Intent intent = new Intent(this, Filter.class);
         startActivity(intent);
+
+    }
+
+    public void logOut(MenuItem item) {
+
+        Intent intent = new Intent(this, Login.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+
     }
 
     public void loadingFragment() {
@@ -98,6 +118,29 @@ public class MainActivity extends AppCompatActivity /*implements ResultAdapter.L
 
         }
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (Integer.parseInt(android.os.Build.VERSION.SDK) < 5
+                && keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0) {
+            Log.d("CDA", "onKeyDown Called");
+
+            if (getIntent().getStringExtra("fromResults") == null) {
+
+                onBackPressed();
+            }
+
+
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public void onBackPressed() {
+        moveTaskToBack(true);
+        return;
     }
 
 

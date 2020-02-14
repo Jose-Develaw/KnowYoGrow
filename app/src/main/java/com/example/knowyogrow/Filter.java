@@ -96,6 +96,7 @@ public class Filter extends AppCompatActivity implements View.OnClickListener, C
             i.putExtra("flavor", flavorString);
             i.putExtra("filterType", "all");
             startActivity(i);
+
         } else {
             Toast.makeText(this, "SELECT AT LEAST ONE FILTER FOR EACH CATEGORY", Toast.LENGTH_LONG).show();
         }
