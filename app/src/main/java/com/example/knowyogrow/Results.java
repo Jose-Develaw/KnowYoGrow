@@ -88,6 +88,8 @@ public class Results extends AppCompatActivity implements ResultAdapter.Listener
 
     @Override
     public void onResultClick(int position) {
+
+
         StrainComplete sc = datos.get(position);
         Intent i = new Intent(Results.this, Detail.class);
         i.putExtra("finisher", new ResultReceiver(null) {

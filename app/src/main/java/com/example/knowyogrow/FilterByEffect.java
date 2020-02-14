@@ -5,6 +5,8 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -70,18 +72,48 @@ public class FilterByEffect extends AppCompatActivity implements View.OnClickLis
         Chip effectSelected = (Chip) findViewById(effects.getCheckedChipId());
 
 
-        if (effectSelected != null) {
+        if (checkConnectivity()) {
 
-            String effectString = effectSelected.getText().toString();
-            Intent i = new Intent(this, Results.class);
-            i.putExtra("effect", effectString);
-            i.putExtra("filterType", "byEffect");
-            startActivity(i);
+            if (effectSelected != null) {
+
+                String effectString = effectSelected.getText().toString();
+                Intent i = new Intent(this, Results.class);
+                i.putExtra("effect", effectString);
+                i.putExtra("filterType", "byEffect");
+                startActivity(i);
+
+            } else {
+                Toast.makeText(this, "SELECT AN EFFECT FOR FILTERING", Toast.LENGTH_LONG).show();
+            }
 
         } else {
-            Toast.makeText(this, "SELECT AN EFFECT FOR FILTERING", Toast.LENGTH_LONG).show();
+
+            Toast.makeText (FilterByEffect.this, "Network not available",
+                    Toast.LENGTH_LONG).show ();
         }
 
+
+
+    }
+
+    public boolean checkConnectivity() {
+
+        // Obtenemos un gestor de las conexiones de red
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService (this.CONNECTIVITY_SERVICE);
+
+        // Obtenemos el estado de la red
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        // Si está conectado
+        if (networkInfo != null && networkInfo.isConnected ()) {
+
+            return true;
+
+        } else {
+
+            return false;
+        }
 
 
     }

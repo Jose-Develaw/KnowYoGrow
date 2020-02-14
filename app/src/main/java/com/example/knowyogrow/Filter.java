@@ -5,6 +5,8 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -83,31 +85,32 @@ public class Filter extends AppCompatActivity implements View.OnClickListener, C
         Chip effectSelected = (Chip) findViewById(effects.getCheckedChipId());
         Chip flavorSelected = (Chip) findViewById(flavors.getCheckedChipId());
 
-        if (raceSelected != null && effectSelected != null && flavorSelected != null) {
+        if (checkConnectivity()) {
 
-            String raceString = raceSelected.getText().toString();
-            String effectString = effectSelected.getText().toString();
-            String flavorString = flavorSelected.getText().toString();
+            if (raceSelected != null && effectSelected != null && flavorSelected != null) {
 
-            Intent i = new Intent(this, Results.class);
+                String raceString = raceSelected.getText().toString();
+                String effectString = effectSelected.getText().toString();
+                String flavorString = flavorSelected.getText().toString();
 
-            i.putExtra("race", raceString);
-            i.putExtra("effect", effectString);
-            i.putExtra("flavor", flavorString);
-            i.putExtra("filterType", "all");
-            startActivity(i);
+                Intent i = new Intent(this, Results.class);
 
+                i.putExtra("race", raceString);
+                i.putExtra("effect", effectString);
+                i.putExtra("flavor", flavorString);
+                i.putExtra("filterType", "all");
+                startActivity(i);
+
+            } else {
+                Toast.makeText(this, "SELECT AT LEAST ONE FILTER FOR EACH CATEGORY", Toast.LENGTH_LONG).show();
+            }
         } else {
-            Toast.makeText(this, "SELECT AT LEAST ONE FILTER FOR EACH CATEGORY", Toast.LENGTH_LONG).show();
+
+            Toast.makeText (Filter.this, "Network not available",
+                    Toast.LENGTH_LONG).show ();
         }
 
-
-
     }
-
-
-
-
 
     @Override
     public void onResponse(Call<ArrayList<Effect>> call, Response<ArrayList<Effect>> response) {
@@ -134,5 +137,25 @@ public class Filter extends AppCompatActivity implements View.OnClickListener, C
     @Override
     public void onFailure(Call<ArrayList<Effect>> call, Throwable t) {
 
+    }
+
+    public boolean checkConnectivity() {
+
+        // Obtenemos un gestor de las conexiones de red
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService (this.CONNECTIVITY_SERVICE);
+
+        // Obtenemos el estado de la red
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        // Si está conectado
+        if (networkInfo != null && networkInfo.isConnected ()) {
+
+            return true;
+
+        } else {
+
+            return false;
+        }
     }
 }

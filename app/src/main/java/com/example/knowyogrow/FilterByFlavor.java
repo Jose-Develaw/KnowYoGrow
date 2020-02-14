@@ -5,6 +5,8 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -64,18 +66,47 @@ public class FilterByFlavor extends AppCompatActivity implements View.OnClickLis
         Chip flavorSelected = (Chip) findViewById(flavors.getCheckedChipId());
 
 
-        if (flavorSelected != null) {
+        if (checkConnectivity()) {
 
-            String flavorString = flavorSelected.getText().toString();
-            Intent i = new Intent(this, Results.class);
-            i.putExtra("flavor", flavorString);
-            i.putExtra("filterType", "byFlavor");
-            startActivity(i);
+            if (flavorSelected != null) {
 
+                String flavorString = flavorSelected.getText().toString();
+                Intent i = new Intent(this, Results.class);
+                i.putExtra("flavor", flavorString);
+                i.putExtra("filterType", "byFlavor");
+                startActivity(i);
+
+            } else {
+                Toast.makeText(this, "SELECT A FLAVOR FOR FILTERING", Toast.LENGTH_LONG).show();
+            }
         } else {
-            Toast.makeText(this, "SELECT A FLAVOR FOR FILTERING", Toast.LENGTH_LONG).show();
+
+            Toast.makeText (FilterByFlavor.this, "Network not available",
+                    Toast.LENGTH_LONG).show ();
         }
 
+
+
+    }
+
+    public boolean checkConnectivity() {
+
+        // Obtenemos un gestor de las conexiones de red
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService (this.CONNECTIVITY_SERVICE);
+
+        // Obtenemos el estado de la red
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        // Si está conectado
+        if (networkInfo != null && networkInfo.isConnected ()) {
+
+            return true;
+
+        } else {
+
+            return false;
+        }
 
 
     }

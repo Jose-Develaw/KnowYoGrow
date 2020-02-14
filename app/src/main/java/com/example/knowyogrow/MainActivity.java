@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.util.Log;
@@ -57,33 +59,72 @@ public class MainActivity extends AppCompatActivity /*implements ResultAdapter.L
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_toolbar, menu);
-        MenuCompat.setGroupDividerEnabled(menu, true);
-
-
         return true;
     }
 
     public void filterByRace(MenuItem item) {
-        Intent intent = new Intent(this, FilterByRace.class);
-        startActivity(intent);
+
+       if (checkConnectivity()) {
+
+            Intent intent = new Intent(this, FilterByRace.class);
+            startActivity(intent);
+        } else {
+            // Red no disponible
+            Toast.makeText (MainActivity.this, "Network not available",
+                    Toast.LENGTH_LONG).show ();
+        }
+
+
 
     }
 
     public void filterByEffect(MenuItem item) {
-        Intent intent = new Intent(this, FilterByEffect.class);
-        startActivity(intent);
+
+        if (checkConnectivity()) {
+
+            Intent intent = new Intent(this, FilterByEffect.class);
+            startActivity(intent);
+
+        } else {
+            // Red no disponible
+            Toast.makeText (MainActivity.this, "Network not available",
+                    Toast.LENGTH_LONG).show ();
+        }
+
 
     }
 
     public void filterByFlavor(MenuItem item) {
-        Intent intent = new Intent(this, FilterByFlavor.class);
-        startActivity(intent);
+
+        if (checkConnectivity()) {
+
+            Intent intent = new Intent(this, FilterByFlavor.class);
+            startActivity(intent);
+
+        } else {
+            // Red no disponible
+            Toast.makeText (MainActivity.this, "Network not available",
+                    Toast.LENGTH_LONG).show ();
+        }
+
+
 
     }
 
     public void filterByAll(MenuItem item) {
-        Intent intent = new Intent(this, Filter.class);
-        startActivity(intent);
+
+        if (checkConnectivity()) {
+
+            Intent intent = new Intent(this, Filter.class);
+            startActivity(intent);
+
+        } else {
+            // Red no disponible
+            Toast.makeText (MainActivity.this, "Network not available",
+                    Toast.LENGTH_LONG).show ();
+        }
+
+
 
     }
 
@@ -141,6 +182,28 @@ public class MainActivity extends AppCompatActivity /*implements ResultAdapter.L
     public void onBackPressed() {
         moveTaskToBack(true);
         return;
+    }
+
+    public boolean checkConnectivity() {
+
+        // Obtenemos un gestor de las conexiones de red
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService (MainActivity.this.CONNECTIVITY_SERVICE);
+
+        // Obtenemos el estado de la red
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        // Si está conectado
+        if (networkInfo != null && networkInfo.isConnected ()) {
+
+            return true;
+
+        } else {
+
+            return false;
+        }
+
+
     }
 
 
