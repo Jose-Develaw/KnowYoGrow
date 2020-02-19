@@ -14,7 +14,7 @@
         <item
             android:id="@+id/logOut"
             android:onClick="logOut"
-            android:title="LOG OUT" />
+            android:title="LOGOUT" />
     </group>
 
 </menu>

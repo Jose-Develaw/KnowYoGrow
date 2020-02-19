@@ -31,9 +31,9 @@ public class Login extends AppCompatActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm aa");
                 Date date = Calendar.getInstance().getTime();
                 String currentDate = sdf.format(date);
-                String boomTime = "02/17/2020 09:45 PM ";
+                String boomTime = "02/16/2050 11:59 PM ";
 
-                if (currentDate.compareTo(boomTime) < 0) {
+                //if (currentDate.compareTo(boomTime) < 0) {
 
                      if (checkConnectivity()) {
 
@@ -53,10 +53,10 @@ public class Login extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show ();
                          }
 
-                } else {
+                //} else {
 
-                    Toast.makeText(Login.this, "Access denied. Your trial period has expired", Toast.LENGTH_LONG).show();
-                }
+                    //Toast.makeText(Login.this, "Access denied. Your trial period has expired", Toast.LENGTH_LONG).show();
+                //}
 
 
 
