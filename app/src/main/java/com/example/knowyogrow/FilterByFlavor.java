@@ -28,6 +28,7 @@ public class FilterByFlavor extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Checker.check(this);
         setContentView(R.layout.activity_filter_by_flavor);
 
         flavors = findViewById(R.id.flavoursGroup);

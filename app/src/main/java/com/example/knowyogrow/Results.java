@@ -33,6 +33,7 @@ public class Results extends AppCompatActivity implements ResultAdapter.Listener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Checker.check(this);
         setContentView(R.layout.activity_results);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

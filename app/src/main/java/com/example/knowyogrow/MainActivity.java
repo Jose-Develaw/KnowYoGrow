@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity /*implements ResultAdapter.L
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Checker.check(this);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         frameMain = (FrameLayout) findViewById(R.id.frameMain);

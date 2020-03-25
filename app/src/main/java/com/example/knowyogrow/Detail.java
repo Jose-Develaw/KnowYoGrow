@@ -39,6 +39,7 @@ public class Detail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Checker.check(this);
         setContentView(R.layout.activity_detail);
         fromResults = getIntent().getStringExtra("fromResults");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

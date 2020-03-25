@@ -36,8 +36,7 @@ public class Filter extends AppCompatActivity implements View.OnClickListener, C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter);
-
-
+        Checker.check(this);
 
         Call<ArrayList<Effect>> effectListCall = ApiService.getApiService().getEffects();
         effectListCall.enqueue(this);

@@ -20,6 +20,7 @@ public class FilterByRace extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Checker.check(this);
         setContentView(R.layout.activity_filter_by_race);
         races = findViewById(R.id.raceGroup);
         Button getButton = findViewById(R.id.getButton);

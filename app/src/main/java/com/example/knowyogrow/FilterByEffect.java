@@ -29,6 +29,7 @@ public class FilterByEffect extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Checker.check(this);
         setContentView(R.layout.activity_filer_by_effect);
 
         effects = findViewById(R.id.effectsGroup);
