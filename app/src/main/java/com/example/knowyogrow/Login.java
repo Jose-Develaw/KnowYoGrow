@@ -110,13 +110,13 @@ public class Login extends AppCompatActivity {
                         }
                     });
 
-                    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm aa");
+                    /*SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm aa");
                     Date date = Calendar.getInstance().getTime();
                     String currentDate = sdf.format(date);
-                    SharedPreferences sharedPreferences = getSharedPreferences("preferences", 0);
+                    SharedPreferences sharedPreferences = getSharedPreferences("lastAccess", 0);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("lastAccess", currentDate);
-                    editor.commit();
+                    editor.commit();*/
 
                     startActivityForResult(i,1);
 

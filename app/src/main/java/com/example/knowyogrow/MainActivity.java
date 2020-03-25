@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -131,6 +132,8 @@ public class MainActivity extends AppCompatActivity /*implements ResultAdapter.L
 
     public void logOut(MenuItem item) {
 
+        SharedPreferences sharedPreferences = this.getApplicationContext().getSharedPreferences("lastAccess", 0);
+        sharedPreferences.edit().clear().apply();
         Intent intent = new Intent(this, Login.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
